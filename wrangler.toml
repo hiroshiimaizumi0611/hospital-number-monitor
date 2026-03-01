@@ -1,0 +1,19 @@
+name = "hospital-number-monitor"
+main = "src/index.ts"
+compatibility_date = "2026-03-01"
+
+[observability]
+enabled = true
+
+[[kv_namespaces]]
+binding = "MONITOR_STATE"
+id = "YOUR_PRODUCTION_KV_NAMESPACE_ID"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+MONITOR_TARGET_URL = "https://junban-watch.com/free/sie3f4/index.php"
+NUMBER_EXTRACTOR_REGEX = '<td class="goods_name">\s*([0-9]{1,4})\s*</td>'
+ERROR_ALERT_THRESHOLD = "3"
