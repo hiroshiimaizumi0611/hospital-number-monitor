@@ -4,6 +4,8 @@ import type { Env, MonitorState } from "./types";
 const DEFAULT_ERROR_ALERT_THRESHOLD = 3;
 const NTFY_BASE_URL = "https://ntfy.sh";
 const DEFAULT_NUMBER_EXTRACTOR_REGEX = '<td class="goods_name">\\s*([0-9]{1,4})\\s*</td>';
+const ALERT_TITLE = "Hospital Number Alert";
+const ERROR_ALERT_TITLE = "Hospital Number Alert Error";
 
 export async function runMonitor(env: Env): Promise<MonitorState> {
   const state = await loadState(env);
@@ -31,7 +33,7 @@ export async function runMonitor(env: Env): Promise<MonitorState> {
   if (!nextState.finalAlertSent && currentNumber >= state.targetNumber) {
     const delivered = await sendNtfyNotification(
       env,
-      "病院受付番号通知",
+      ALERT_TITLE,
       `順番です。現在番号: ${currentNumber} / あなたの番号: ${state.targetNumber}`,
     );
 
@@ -53,7 +55,7 @@ export async function runMonitor(env: Env): Promise<MonitorState> {
     if (!nextState.preAlertSent && currentNumber >= preAlertPoint) {
       const delivered = await sendNtfyNotification(
         env,
-        "病院受付番号通知",
+        ALERT_TITLE,
         `順番が近づいています。現在番号: ${currentNumber} / あなたの番号: ${state.targetNumber}`,
       );
 
@@ -88,7 +90,7 @@ async function recordMonitorError(env: Env, state: MonitorState, message: string
   if (nextState.errorCount === threshold) {
     await sendNtfyNotification(
       env,
-      "病院受付番号通知エラー",
+      ERROR_ALERT_TITLE,
       `監視が連続で失敗しています。直近エラー: ${message}`,
     );
   }
