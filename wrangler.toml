@@ -7,8 +7,8 @@ enabled = true
 
 [[kv_namespaces]]
 binding = "MONITOR_STATE"
-id = "YOUR_PRODUCTION_KV_NAMESPACE_ID"
-preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+id = "97a60cd863714e9190bea8d24dde544d"
+preview_id = "97a60cd863714e9190bea8d24dde544d"
 
 [triggers]
 crons = ["* * * * *"]
