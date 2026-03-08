@@ -331,10 +331,30 @@ export function renderHomePage(): string {
 
         .status-card {
           grid-area: status;
-          align-self: start;
-          position: sticky;
-          top: 18px;
-          margin-top: 2px;
+          align-self: stretch;
+          margin-top: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100%;
+        }
+
+        .status-grid {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
+          gap: 0;
+          padding: 10px 16px 14px;
+        }
+
+        .status-row {
+          padding: 8px 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .status-row:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
         }
 
         h1 {
