@@ -50,19 +50,6 @@ export function renderHomePage(): string {
         box-shadow: 0 20px 44px rgba(15, 23, 42, 0.09);
       }
 
-      .phone-status {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 16px 8px;
-        font-size: 0.78rem;
-        font-weight: 600;
-      }
-
-      .phone-status .signal {
-        font-size: 0.72rem;
-      }
-
       .content {
         display: grid;
         gap: 10px;
@@ -313,10 +300,6 @@ export function renderHomePage(): string {
   <body>
     <main>
       <section id="screen-card" class="screen">
-        <div class="phone-status">
-          <span id="phone-time">11:42</span>
-          <span class="signal">5G 100%</span>
-        </div>
         <div class="content">
           <div>
             <p class="kicker">JUNBAN WATCH</p>
@@ -412,10 +395,8 @@ export function renderHomePage(): string {
       const enabledBadge = document.getElementById('enabled-badge');
       const nextCheck = document.getElementById('next-check');
       const thresholdKicker = document.getElementById('threshold-kicker');
-      const phoneTime = document.getElementById('phone-time');
       const TOKEN_KEY = 'hospital-number-monitor-token';
 
-      setPhoneTime();
       hydrateToken();
       bindEvents();
 
@@ -431,13 +412,6 @@ export function renderHomePage(): string {
         stopButton.addEventListener('click', handleStop);
         tokenInput.addEventListener('change', persistToken);
         tokenInput.addEventListener('blur', persistToken);
-      }
-
-      function setPhoneTime() {
-        phoneTime.textContent = new Date().toLocaleTimeString('ja-JP', {
-          hour: '2-digit',
-          minute: '2-digit'
-        });
       }
 
       function hydrateToken() {
