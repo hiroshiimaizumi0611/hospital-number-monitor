@@ -301,19 +301,20 @@ export function renderHomePage(): string {
         }
 
         .content {
-          grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr);
+          grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
           grid-template-areas:
-            "header status"
+            "header header"
             "hero status"
             "form status"
             "info status";
-          column-gap: 18px;
-          row-gap: 14px;
+          column-gap: 20px;
+          row-gap: 16px;
           padding: 22px;
         }
 
         .page-header {
           grid-area: header;
+          max-width: 760px;
         }
 
         .hero-card {
@@ -333,6 +334,7 @@ export function renderHomePage(): string {
           align-self: start;
           position: sticky;
           top: 18px;
+          margin-top: 2px;
         }
 
         h1 {
