@@ -37,7 +37,7 @@ export function renderHomePage(): string {
       }
 
       main {
-        width: min(100%, 430px);
+        width: min(100%, 1120px);
         margin: 0 auto;
         padding: 20px 12px 36px;
       }
@@ -54,6 +54,10 @@ export function renderHomePage(): string {
         display: grid;
         gap: 10px;
         padding: 14px 16px 18px;
+      }
+
+      .page-header {
+        display: grid;
       }
 
       .kicker {
@@ -287,6 +291,81 @@ export function renderHomePage(): string {
         font-weight: 700;
       }
 
+      @media (min-width: 900px) {
+        main {
+          padding: 30px 18px 48px;
+        }
+
+        .screen {
+          border-radius: 28px;
+        }
+
+        .content {
+          grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr);
+          grid-template-areas:
+            "header status"
+            "hero status"
+            "form status"
+            "info status";
+          column-gap: 18px;
+          row-gap: 14px;
+          padding: 22px;
+        }
+
+        .page-header {
+          grid-area: header;
+        }
+
+        .hero-card {
+          grid-area: hero;
+        }
+
+        .form-card {
+          grid-area: form;
+        }
+
+        .info-card {
+          grid-area: info;
+        }
+
+        .status-card {
+          grid-area: status;
+          align-self: start;
+          position: sticky;
+          top: 18px;
+        }
+
+        h1 {
+          font-size: 2.1rem;
+        }
+
+        .intro {
+          font-size: 0.83rem;
+        }
+
+        .hero-number {
+          font-size: 3.4rem;
+        }
+
+        .hero-meta {
+          font-size: 0.8rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+
+        .form-grid label {
+          font-size: 0.75rem;
+        }
+
+        .form-grid .token-field,
+        .form-grid .actions {
+          grid-column: 1 / -1;
+        }
+      }
+
       @media (max-width: 380px) {
         h1 {
           font-size: 1.5rem;
@@ -301,7 +380,7 @@ export function renderHomePage(): string {
     <main>
       <section id="screen-card" class="screen">
         <div class="content">
-          <div>
+          <div class="page-header">
             <p class="kicker">JUNBAN WATCH</p>
             <h1>病院受付番号モニター</h1>
             <p class="intro">現在の待ち番号を監視し、順番が近づくと通知します。</p>
@@ -327,7 +406,7 @@ export function renderHomePage(): string {
                 事前通知しきい値
                 <input id="pre-alert-threshold" name="preAlertThreshold" type="number" min="0" inputmode="numeric" value="3" required />
               </label>
-              <label>
+              <label class="token-field">
                 共有トークン
                 <input id="token" name="token" type="password" autocomplete="off" required />
               </label>
