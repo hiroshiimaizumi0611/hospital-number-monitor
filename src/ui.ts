@@ -8,14 +8,18 @@ export function renderHomePage(): string {
     <style>
       :root {
         color-scheme: light;
-        --bg: #f4f5ef;
-        --panel: rgba(255, 255, 255, 0.9);
-        --ink: #15231e;
-        --muted: #5f6d67;
-        --line: rgba(21, 35, 30, 0.12);
-        --accent: #0e7a57;
-        --accent-strong: #09593f;
-        --warn: #b63b1a;
+        --app-bg: #eef3f8;
+        --screen-bg: #f8fbff;
+        --card-bg: #ffffff;
+        --hero-bg: #eff6ff;
+        --hero-line: #bfdbfe;
+        --line: #d9e2ef;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --primary: #2563eb;
+        --primary-strong: #1d4ed8;
+        --success: #16a34a;
+        --danger: #dc2626;
       }
 
       * {
@@ -25,104 +29,257 @@ export function renderHomePage(): string {
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at top right, rgba(14, 122, 87, 0.18), transparent 40%),
-          linear-gradient(180deg, #fbfcf8 0%, var(--bg) 100%);
+          radial-gradient(circle at top center, rgba(37, 99, 235, 0.11), transparent 44%),
+          linear-gradient(180deg, #f7fafe 0%, var(--app-bg) 100%);
       }
 
       main {
-        width: min(100%, 480px);
+        width: min(100%, 430px);
         margin: 0 auto;
-        padding: 24px 16px 40px;
+        padding: 20px 12px 36px;
       }
 
-      .panel {
-        background: var(--panel);
-        border: 1px solid var(--line);
+      .screen {
+        background: var(--screen-bg);
+        border: 1px solid #dbe3ef;
         border-radius: 24px;
-        padding: 20px;
-        box-shadow: 0 18px 40px rgba(21, 35, 30, 0.08);
-        backdrop-filter: blur(12px);
+        overflow: hidden;
+        box-shadow: 0 20px 44px rgba(15, 23, 42, 0.09);
+      }
+
+      .phone-status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .phone-status .signal {
+        font-size: 0.72rem;
+      }
+
+      .content {
+        display: grid;
+        gap: 10px;
+        padding: 14px 16px 18px;
+      }
+
+      .kicker {
+        margin: 0;
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #475569;
       }
 
       h1 {
-        margin: 0 0 8px;
-        font-size: 1.4rem;
-        line-height: 1.3;
-      }
-
-      p {
-        margin: 0;
-        line-height: 1.5;
+        margin: 3px 0 0;
+        font-size: 1.62rem;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
       }
 
       .intro {
+        margin: 7px 0 0;
+        font-size: 0.74rem;
         color: var(--muted);
-        margin-bottom: 18px;
       }
 
-      .metric {
-        margin: 16px 0 18px;
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .hero-card {
+        background: var(--hero-bg);
+        border-color: var(--hero-line);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 16px;
-        border-radius: 18px;
-        background: rgba(14, 122, 87, 0.08);
+        padding-bottom: 0;
       }
 
-      .metric-label {
+      .card-label {
+        font-size: 0.74rem;
         color: var(--muted);
-        font-size: 0.9rem;
       }
 
-      .metric-value {
-        display: block;
-        margin-top: 6px;
-        font-size: 2.4rem;
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 52px;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 0.64rem;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .badge-live {
+        color: #ffffff;
+        background: var(--success);
+      }
+
+      .badge-paused {
+        color: #ffffff;
+        background: #64748b;
+      }
+
+      .hero-number {
+        margin: 4px 16px 0;
+        font-size: 3rem;
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--primary-strong);
+      }
+
+      .hero-meta {
+        margin: 4px 16px 16px;
+        font-size: 0.74rem;
+        color: var(--muted);
+      }
+
+      .section-title {
+        margin: 0;
+        padding: 12px 16px 0;
+        font-size: 0.95rem;
         font-weight: 700;
       }
 
-      form,
-      .actions,
-      .status-grid {
+      .form-grid {
         display: grid;
-        gap: 12px;
+        gap: 10px;
+        padding: 10px 16px 16px;
       }
 
       label {
         display: grid;
         gap: 6px;
-        font-size: 0.92rem;
+        font-size: 0.69rem;
+        font-weight: 600;
       }
 
       input {
         width: 100%;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 10px 12px;
         font: inherit;
+        font-size: 0.9rem;
         color: var(--ink);
-        background: rgba(255, 255, 255, 0.95);
+        background: #f8fafc;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
       }
 
       button {
         width: 100%;
+        border-radius: 8px;
         border: 0;
-        border-radius: 999px;
-        padding: 14px 16px;
+        padding: 12px 10px;
         font: inherit;
+        font-size: 0.86rem;
         font-weight: 700;
-        color: white;
-        background: var(--accent);
+        transition: transform 0.15s ease, opacity 0.15s ease;
       }
 
-      button.secondary {
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .primary {
+        color: #ffffff;
+        background: var(--primary);
+      }
+
+      .secondary {
         color: var(--ink);
-        background: rgba(21, 35, 30, 0.08);
+        background: #e2e8f0;
+        border: 1px solid #cbd5e1;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .refresh {
+        margin-top: 8px;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        padding: 4px 2px 0;
+        text-align: right;
+        font-size: 0.73rem;
+        font-weight: 600;
+      }
+
+      .info-card {
+        display: grid;
+        gap: 3px;
+        padding: 12px 14px;
+        background: #eff6ff;
+        border-color: #bfdbfe;
+      }
+
+      .info-title {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .message {
+        margin: 0;
+        font-size: 0.69rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      .message.error {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      .status-card {
+        padding-bottom: 8px;
+      }
+
+      .status-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 16px 0;
+      }
+
+      .status-kicker {
+        margin: 0;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #64748b;
       }
 
       .status-grid {
-        margin-top: 18px;
+        display: grid;
+        gap: 8px;
+        padding: 8px 16px 10px;
       }
 
       .status-row {
@@ -130,126 +287,157 @@ export function renderHomePage(): string {
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .status-row:last-child {
-        padding-bottom: 0;
-        border-bottom: 0;
       }
 
       .status-label {
         color: var(--muted);
+        font-size: 0.74rem;
       }
 
       .status-value {
         text-align: right;
-        font-weight: 600;
-      }
-
-      .message {
-        min-height: 1.5em;
-        margin-top: 14px;
         font-size: 0.92rem;
-        color: var(--muted);
+        font-weight: 700;
       }
 
-      .message.error {
-        color: var(--warn);
+      @media (max-width: 380px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+        .hero-number {
+          font-size: 2.6rem;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <section class="panel">
-        <h1>病院受付番号モニター</h1>
-        <p class="intro">自分の受付番号を入れると、順番が近づいた時に ntfy へ通知します。</p>
-
-        <div class="metric">
-          <span class="metric-label">現在番号</span>
-          <strong id="current-number" class="metric-value">-</strong>
+      <section id="screen-card" class="screen">
+        <div class="phone-status">
+          <span id="phone-time">11:42</span>
+          <span class="signal">5G 100%</span>
         </div>
+        <div class="content">
+          <div>
+            <p class="kicker">JUNBAN WATCH</p>
+            <h1>病院受付番号モニター</h1>
+            <p class="intro">現在の待ち番号を監視し、順番が近づくと通知します。</p>
+          </div>
 
-        <form id="start-form">
-          <label>
-            共有トークン
-            <input id="token" name="token" type="password" autocomplete="off" required />
-          </label>
-          <label>
-            あなたの受付番号
-            <input id="target-number" name="targetNumber" type="number" min="1" inputmode="numeric" required />
-          </label>
-          <label>
-            事前通知しきい値
-            <input id="pre-alert-threshold" name="preAlertThreshold" type="number" min="0" inputmode="numeric" value="5" required />
-          </label>
-          <button type="submit">監視を開始</button>
-        </form>
+          <section class="card hero-card">
+            <div class="card-head">
+              <span class="card-label">現在の待ち番号</span>
+              <span id="mode-badge" class="badge badge-live">監視中</span>
+            </div>
+            <strong id="current-number" class="hero-number">-</strong>
+            <p id="next-check" class="hero-meta">次回チェック: 30秒後</p>
+          </section>
 
-        <div class="actions" style="margin-top: 12px;">
-          <button id="refresh-button" type="button" class="secondary">状態を更新</button>
-          <button id="stop-button" type="button" class="secondary">監視を停止</button>
+          <section class="card form-card">
+            <h2 class="section-title">監視設定</h2>
+            <form id="start-form" class="form-grid">
+              <label>
+                目標番号
+                <input id="target-number" name="targetNumber" type="number" min="1" inputmode="numeric" required />
+              </label>
+              <label>
+                事前通知しきい値
+                <input id="pre-alert-threshold" name="preAlertThreshold" type="number" min="0" inputmode="numeric" value="3" required />
+              </label>
+              <label>
+                共有トークン
+                <input id="token" name="token" type="password" autocomplete="off" required />
+              </label>
+              <div class="actions">
+                <button id="start-button" class="primary" type="submit">監視を開始</button>
+                <button id="stop-button" class="secondary" type="button">監視を停止</button>
+              </div>
+            </form>
+            <button id="refresh-button" class="refresh" type="button">状態を更新</button>
+          </section>
+
+          <section class="card info-card">
+            <p class="info-title">通知先は ntfy を使用</p>
+            <p id="message" class="message">端末でトピックを購読すると通知を受け取れます。</p>
+          </section>
+
+          <section class="card status-card">
+            <div class="status-head">
+              <p class="status-kicker">MONITOR STATUS · しきい値 <span id="threshold-kicker">-</span></p>
+              <span id="enabled-badge" class="badge badge-live">RUNNING</span>
+            </div>
+            <div class="status-grid">
+              <div class="status-row">
+                <span class="status-label">監視状態</span>
+                <span id="enabled" class="status-value">停止中</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">現在番号</span>
+                <span id="target-display" class="status-value">-</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">目標番号</span>
+                <span id="threshold-display" class="status-value">-</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">最終確認</span>
+                <span id="checked-at" class="status-value">-</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">連続失敗</span>
+                <span id="error-count" class="status-value">0</span>
+              </div>
+            </div>
+          </section>
         </div>
-
-        <div class="status-grid">
-          <div class="status-row">
-            <span class="status-label">監視状態</span>
-            <span id="enabled" class="status-value">停止中</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">設定番号</span>
-            <span id="target-display" class="status-value">-</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">しきい値</span>
-            <span id="threshold-display" class="status-value">-</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">最終確認</span>
-            <span id="checked-at" class="status-value">-</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">連続失敗</span>
-            <span id="error-count" class="status-value">0</span>
-          </div>
-        </div>
-
-        <p id="message" class="message"></p>
       </section>
     </main>
 
     <script>
-      const tokenInput = document.getElementById("token");
-      const targetInput = document.getElementById("target-number");
-      const thresholdInput = document.getElementById("pre-alert-threshold");
-      const message = document.getElementById("message");
-      const currentNumber = document.getElementById("current-number");
-      const enabled = document.getElementById("enabled");
-      const targetDisplay = document.getElementById("target-display");
-      const thresholdDisplay = document.getElementById("threshold-display");
-      const checkedAt = document.getElementById("checked-at");
-      const errorCount = document.getElementById("error-count");
-      const startForm = document.getElementById("start-form");
-      const refreshButton = document.getElementById("refresh-button");
-      const stopButton = document.getElementById("stop-button");
-      const TOKEN_KEY = "hospital-number-monitor-token";
+      const tokenInput = document.getElementById('token');
+      const targetInput = document.getElementById('target-number');
+      const thresholdInput = document.getElementById('pre-alert-threshold');
+      const message = document.getElementById('message');
+      const currentNumber = document.getElementById('current-number');
+      const enabled = document.getElementById('enabled');
+      const targetDisplay = document.getElementById('target-display');
+      const thresholdDisplay = document.getElementById('threshold-display');
+      const checkedAt = document.getElementById('checked-at');
+      const errorCount = document.getElementById('error-count');
+      const startForm = document.getElementById('start-form');
+      const refreshButton = document.getElementById('refresh-button');
+      const stopButton = document.getElementById('stop-button');
+      const startButton = document.getElementById('start-button');
+      const modeBadge = document.getElementById('mode-badge');
+      const enabledBadge = document.getElementById('enabled-badge');
+      const nextCheck = document.getElementById('next-check');
+      const thresholdKicker = document.getElementById('threshold-kicker');
+      const phoneTime = document.getElementById('phone-time');
+      const TOKEN_KEY = 'hospital-number-monitor-token';
 
+      setPhoneTime();
       hydrateToken();
       bindEvents();
 
       if (tokenInput.value) {
         refreshStatus();
       } else {
-        setMessage("共有トークンを入力すると状態を取得できます。");
+        setMessage('共有トークンを入力すると状態を取得できます。');
       }
 
       function bindEvents() {
-        startForm.addEventListener("submit", handleStart);
-        refreshButton.addEventListener("click", refreshStatus);
-        stopButton.addEventListener("click", handleStop);
-        tokenInput.addEventListener("change", persistToken);
-        tokenInput.addEventListener("blur", persistToken);
+        startForm.addEventListener('submit', handleStart);
+        refreshButton.addEventListener('click', refreshStatus);
+        stopButton.addEventListener('click', handleStop);
+        tokenInput.addEventListener('change', persistToken);
+        tokenInput.addEventListener('blur', persistToken);
+      }
+
+      function setPhoneTime() {
+        phoneTime.textContent = new Date().toLocaleTimeString('ja-JP', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
       }
 
       function hydrateToken() {
@@ -270,10 +458,10 @@ export function renderHomePage(): string {
       async function handleStart(event) {
         event.preventDefault();
         persistToken();
-        setMessage("監視を開始しています...");
+        setMessage('監視を開始しています...');
 
         try {
-          const state = await postJson("/api/start", {
+          const state = await postJson('/api/start', {
             token: tokenInput.value.trim(),
             targetNumber: Number(targetInput.value),
             preAlertThreshold: Number(thresholdInput.value)
@@ -281,7 +469,7 @@ export function renderHomePage(): string {
 
           renderState(state);
           if (!state.lastError) {
-            setMessage("監視を開始しました。");
+            setMessage('監視を開始しました。');
           }
         } catch (error) {
           setError(error.message);
@@ -290,16 +478,16 @@ export function renderHomePage(): string {
 
       async function handleStop() {
         persistToken();
-        setMessage("監視を停止しています...");
+        setMessage('監視を停止しています...');
 
         try {
-          const state = await postJson("/api/stop", {
+          const state = await postJson('/api/stop', {
             token: tokenInput.value.trim()
           });
 
           renderState(state);
           if (!state.lastError) {
-            setMessage("監視を停止しました。");
+            setMessage('監視を停止しました。');
           }
         } catch (error) {
           setError(error.message);
@@ -310,23 +498,23 @@ export function renderHomePage(): string {
         persistToken();
 
         if (!tokenInput.value.trim()) {
-          setError("共有トークンを入力してください。");
+          setError('共有トークンを入力してください。');
           return;
         }
 
-        setMessage("状態を取得しています...");
+        setMessage('状態を取得しています...');
 
         try {
-          const response = await fetch("/api/status?token=" + encodeURIComponent(tokenInput.value.trim()));
+          const response = await fetch('/api/status?token=' + encodeURIComponent(tokenInput.value.trim()));
           const payload = await response.json();
 
           if (!response.ok) {
-            throw new Error(payload.error || "状態取得に失敗しました。");
+            throw new Error(payload.error || '状態取得に失敗しました。');
           }
 
           renderState(payload.state);
           if (!payload.state.lastError) {
-            setMessage("最新状態を取得しました。");
+            setMessage('最新状態を取得しました。');
           }
         } catch (error) {
           setError(error.message);
@@ -335,55 +523,97 @@ export function renderHomePage(): string {
 
       async function postJson(url, body) {
         const response = await fetch(url, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "content-type": "application/json"
+            'content-type': 'application/json'
           },
           body: JSON.stringify(body)
         });
         const payload = await response.json();
 
         if (!response.ok) {
-          throw new Error(payload.error || "通信に失敗しました。");
+          throw new Error(payload.error || '通信に失敗しました。');
         }
 
         return payload.state;
       }
 
       function renderState(state) {
-        currentNumber.textContent = state.lastSeenNumber === null ? "-" : String(state.lastSeenNumber);
-        enabled.textContent = state.enabled ? "監視中" : "停止中";
-        targetDisplay.textContent = state.targetNumber === null ? "-" : String(state.targetNumber);
-        thresholdDisplay.textContent = String(state.preAlertThreshold);
+        const running = Boolean(state.enabled);
+        const lastSeen = state.lastSeenNumber === null ? '--' : String(state.lastSeenNumber);
+
+        currentNumber.textContent = lastSeen;
+        enabled.textContent = running ? '監視中' : '停止中';
+        targetDisplay.textContent = lastSeen;
+        thresholdDisplay.textContent = state.targetNumber === null ? '-' : String(state.targetNumber);
+        thresholdKicker.textContent = String(state.preAlertThreshold);
         checkedAt.textContent = formatTimestamp(state.lastCheckedAt);
         errorCount.textContent = String(state.errorCount);
+        nextCheck.textContent = running
+          ? '次回チェック: ' + formatNextCheck(state.lastCheckedAt)
+          : '監視停止中です。開始するとチェックが再開されます。';
+
+        setBadgeState(modeBadge, running, running ? '監視中' : '停止中');
+        setBadgeState(enabledBadge, running, running ? 'RUNNING' : 'PAUSED');
 
         if (state.targetNumber !== null) {
           targetInput.value = String(state.targetNumber);
         }
 
         thresholdInput.value = String(state.preAlertThreshold);
+        stopButton.disabled = !running;
+        startButton.disabled = false;
 
         if (state.lastError) {
           setError(state.lastError);
         }
       }
 
+      function setBadgeState(element, isRunning, label) {
+        element.classList.remove('badge-live', 'badge-paused');
+        element.classList.add(isRunning ? 'badge-live' : 'badge-paused');
+        element.textContent = label;
+      }
+
       function formatTimestamp(value) {
         if (!value) {
-          return "-";
+          return '-';
         }
 
-        return new Date(value).toLocaleString("ja-JP");
+        return new Date(value).toLocaleString('ja-JP', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      function formatNextCheck(value) {
+        if (!value) {
+          return '30秒後';
+        }
+
+        const nextMs = new Date(value).getTime() + 30 * 1000;
+        if (Number.isNaN(nextMs)) {
+          return '30秒後';
+        }
+
+        const diffSec = Math.round((nextMs - Date.now()) / 1000);
+        if (diffSec <= 0) {
+          return 'まもなく';
+        }
+
+        return diffSec + '秒後';
       }
 
       function setMessage(text) {
-        message.classList.remove("error");
+        message.classList.remove('error');
         message.textContent = text;
       }
 
       function setError(text) {
-        message.classList.add("error");
+        message.classList.add('error');
         message.textContent = text;
       }
     </script>
